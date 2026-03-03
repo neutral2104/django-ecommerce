@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Order Successful</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}</p>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <p>
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'register' %}">Register</a>
+    </p>
+    {% endif %}
+    <h1>Thank you for your order!</h1>
+    <p>Your order ID is {{ order.id }}.</p>
+    <a href="/">Back to Products</a>
+  </body>
+</html>

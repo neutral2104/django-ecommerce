@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Your Cart</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+{% endif %}
+
+    <h1>Your Cart</h1>
+    <ul>
+      {% for item in products %}
+      <li>
+        {{ item.product.name }} (x{{ item.quantity }}) - ${{ item.product.price
+        }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p>Total: ${{ total }}</p>
+    <a href="/">Continue Shopping</a>
+    <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+  </body>
+</html>

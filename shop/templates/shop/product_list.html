@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Products</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}</p>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <p>
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'register' %}">Register</a>
+    </p>
+    {% endif %}
+    <h1>Available Products</h1>
+    <ul>
+      {% for product in products %}
+      <li>
+        <a href="{% url 'product_detail' product.pk %}"> {{ product.name }} </a>
+        - ${{ product.price }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
