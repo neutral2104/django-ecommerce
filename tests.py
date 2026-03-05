@@ -21,7 +21,7 @@ class CourseworkTests(TestCase):
     def test_homepage_content(self):
         response = self.client.get('/')
         # Change "Ecommerce" to a word that actually appears on your homepage
-        self.assertContains(response, "Ecommerce") 
+        self.assertContains(response, "Available Products") 
 
     # Test 5: Check if the CSRF token is present on the login page (Security)
     def test_login_csrf_protection(self):
